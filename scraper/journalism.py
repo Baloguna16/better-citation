@@ -56,7 +56,10 @@ def get_pubdate(soup):
     if date_tag:
         publication_date = date_tag["datetime"]
         parts = publication_date.split('T')
-        formatted_date = datetime.strptime(parts[0], "%Y-%m-%d")
+        try:
+            formatted_date = datetime.strptime(parts[0], "%Y-%m-%d")
+        except:
+            formatted_date = date.today()
     else:
         formatted_date = date.today()
     return formatted_date

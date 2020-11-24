@@ -59,7 +59,10 @@ def get_volume_sd(soup):
 def get_pubdate_sd(soup):
     scrape = soup.find("meta", {'name': "citation_publication_date"})
     if scrape:
-        pubdate = datetime.strptime(scrape["content"], "%Y/%m/%d")
+        try:
+            pubdate = datetime.strptime(scrape["content"], "%Y/%m/%d")
+        except:
+            pubdate = None
     else:
         pubdate = None
     return pubdate
