@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Manual Citation
+{% endblock %}
+
+{% block body %}
+<br>
+<div class="container">
+  <h1 class="text-center">Manual Cite</h1>
+  <p class="text-center">A bit more work, but still easy. Plus--no ads.</p>
+  <br>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <form action="/manual" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.author_first, class='form-control') }}
+          </div>
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.author_sur, class='form-control') }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ wtf.form_field(form.title, class='form-control') }}
+        </div>
+        <div class="form-group">
+          {{ wtf.form_field(form.container, class='form-control') }}
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.contributor_first, class='form-control') }}
+          </div>
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.contributor_sur, class='form-control') }}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.publisher, class='form-control') }}
+          </div>
+          <div class="form-group col-md-4">
+            {{ wtf.form_field(form.version, class='form-control') }}
+          </div>
+          <div class="form-group col-md-2">
+            {{ wtf.form_field(form.number, class='form-control') }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ wtf.form_field(form.location, class='form-control') }}
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.pubdate, class='form-control') }}
+          </div>
+          <div class="form-group col-md-6">
+            {{ wtf.form_field(form.accessdate, class='form-control') }}
+          </div>
+        </div>
+        <div class="form-row justify-content-center">
+          <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary" value="Cite">Create Citation</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

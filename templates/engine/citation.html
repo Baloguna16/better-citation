@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Automated Citation
+{% endblock %}
+
+{% block body %}
+<br>
+<div class="container">
+  <h1 class="text-center">Web Cite</h1>
+  <p class="text-center">Paste link from publications like NYT, Vox, Nature, ScienceDirect, and more for a quick MLA citation. No ads, no catch.</p>
+  <br>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <form class="form-inline" action="/citation" method="POST">
+        {{ form.csrf_token }}
+        <div class="input-group mb-3">
+          {{ form.link(placeholder='Paste link here') }}
+          <div class="input-group-append">
+            <input class="btn btn-outline-secondary" type="submit" value="Create Citation" id="button-addon2"></input>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <br>
+      <a href="/manual">(Cite Manually)</a>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <img src="../static/images/lol.png" class="mx-auto d-block" style="height: 300px;" alt="meme.png">
+      <br>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<!--
+  <form action="/citation" method="POST">
+    {{ form.csrf_token }}
+    {{ wtf.form_field(form.link, class='form-control') }}
+    <button type="submit" value="Cite">Cite</button>
+  </form>
+-->

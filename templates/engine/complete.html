@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Work Cited
+{% endblock %}
+
+{% block body %}
+  <br>
+  <div class="container">
+    <h1 class="text-center">All Done</h1>
+    <br>
+    {% for citation in display_citations %}
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <p>{{ citation|safe }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <br>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <img src="../static/images/lol.png" class="mx-auto d-block" style="height: 300px;" alt="meme.png">
+        <br>
+      </div>
+    </div>
+  </div>
+{% endblock %}
