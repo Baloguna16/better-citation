@@ -16,18 +16,20 @@ Automated Citation
       <form class="form-inline" action="/citation" method="POST">
         {{ form.csrf_token }}
         <div class="input-group mb-3">
-          {{ form.link(placeholder='Paste link here') }}
+          {{ form.link(placeholder='  Paste link here') }}
           <div class="input-group-append">
-            <input class="btn btn-outline-secondary" type="submit" value="Create Citation" id="button-addon2"></input>
+            <input class="btn btn-secondary" type="submit" value="Create Citation" id="button-addon2"></input>
           </div>
         </div>
       </form>
     </div>
   </div>
+  <br>
+  <h4 class="text-center"><i>or</i></h4>
+  <br>
   <div class="row justify-content-center">
     <div class="col-auto">
-      <br>
-      <a href="/manual">(Cite Manually)</a>
+      <a class="btn btn-outline-secondary" role="button" href="/manual">Cite Manually</a>
     </div>
   </div>
 </div>

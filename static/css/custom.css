@@ -1,0 +1,22 @@
+body {
+}
+
+.gold {
+  background-color: #FFCC32;
+}
+
+.btn-secondary {
+  background-color: #FFCC32;
+  border: #FFCC32;
+  color: black;
+}
+
+a, .btn-link {
+  color: #858585;
+  text-decoration: none;
+}
+
+a:hover, .btn-link:hover {
+  color: #FFCC32;
+  text-decoration: none;
+}
