@@ -89,9 +89,8 @@ def get_contributor_mla(contributors):
     if contributors:
         contributor_mla = "Contribution from " + contributors[0]
         if len(contributors) > 1:
-            contributor_mla += ', '
             for i in range(len(contributors) - 1):
-                contributor_mla += contributors[i + 1]
+                contributor_mla += ', ' + contributors[i + 1]
     return contributor_mla
 
 def get_volume_mla(volume):
