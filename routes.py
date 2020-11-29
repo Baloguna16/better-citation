@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, flash, redirect, render_template, request, session, url_for, send_file
 
-from support.forms import FlaskForm, BasicForm, AdvancedForm, ManualForm
+from support.forms import FormatForm, BasicForm, AdvancedForm, ManualForm
 from scraper.nytimes import create_citation_nyt
 from scraper.journalism import create_citation_journalism
 from scraper.sd import create_citation_sd
@@ -16,10 +16,14 @@ def index():
 @bp.route('/citation', methods=['POST', 'GET'])
 def citation():
     form = BasicForm()
-    if form.validate_on_submit():
-        link = form.link.data
-        session['link'] = link
-        return redirect('/engine')
+    if request.method == 'POST':
+        format = request.form.get('format')
+        if format == None:
+            format = 'mla'
+        session['format'] = format
+        if form.validate_on_submit():
+            session['link'] = form.link.data
+            return redirect('/engine')
     for field_name, error_messages in form.errors.items():
             for err in error_messages:
                 flash('Check {}. {}'.format(field_name, err))
@@ -28,10 +32,14 @@ def citation():
 @bp.route('/manual', methods=['POST', 'GET'])
 def manual():
     form = ManualForm()
-    if form.validate_on_submit():
-        citation = create_citation_manual(form)
-        session['citations'] = [citation]
-        return redirect('/complete')
+    if request.method == 'POST':
+        format = request.form.get('format')
+        if format == None:
+            format = 'mla'
+        if form.validate_on_submit():
+            citation = create_citation_manual(form, format)
+            session['citations'] = [citation]
+            return redirect('/complete')
     for field_name, error_messages in form.errors.items():
             for err in error_messages:
                 flash('Check {}. {}'.format(field_name, err))
@@ -40,12 +48,13 @@ def manual():
 @bp.route('/engine')
 def engine():
     link = session['link']
+    format = session['format']
     if "nytimes.com" in link:
-        citation = create_citation_nyt(link, 'mla') #NYT only
+        citation = create_citation_nyt(link, format) #NYT only
     elif "sciencedirect.com" in link:
-        citation = create_citation_sd(link, 'mla') #sciencedirect
+        citation = create_citation_sd(link, format) #sciencedirect
     else:
-        citation = create_citation_journalism(link, 'mla') #other
+        citation = create_citation_journalism(link, format) #other
     session['citations'] = [citation]
     return redirect('/complete')
 

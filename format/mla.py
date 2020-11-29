@@ -75,7 +75,9 @@ def get_author_mla(authors):
     return author_mla
 
 def get_title_mla(title, is_stand_alone=False):
-    if title:
+    if title and is_stand_alone == False:
+        title_mla = "\"" + title + "\""
+    elif title and is_stand_alone == True:
         title_mla = title #italics
     else:
         title_mla = None

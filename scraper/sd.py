@@ -2,6 +2,7 @@ from datetime import datetime, date
 import re
 
 import format.mla as mla
+import format.cmos as cmos
 import scraper.main as scraper
 
 def get_authors_sd(soup):
@@ -115,6 +116,11 @@ def create_citation_sd(link, style="mla"):
         "location" : get_doi_sd(soup),
         "accessdate" : get_accessdate()
         }
-        return mla.research_citation(citation_raw, htmlify=True)
+        if style == 'mla':
+            return mla.research_citation(citation_raw, htmlify=True)
+        elif style == 'cmos':
+            return cmos.research_citation(citation_raw, htmlify=True)
+        else:
+            return None
     else:
         return None

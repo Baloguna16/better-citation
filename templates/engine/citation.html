@@ -9,11 +9,11 @@ Automated Citation
 <br>
 <div class="container">
   <h1 class="text-center">Web Cite</h1>
-  <p class="text-center">Paste link from publications like NYT, Vox, Nature, ScienceDirect, and more for a quick MLA citation. No ads, no catch.</p>
+  <p class="text-center">Paste link from publications like NYT, Vox, Nature, ScienceDirect, and more for a quick citation. No ads, no catch.</p>
   <br>
   <div class="row justify-content-center">
-    <div class="col-auto">
-      <form class="form-inline" action="/citation" method="POST">
+    <form action="/citation" method="POST">
+      <div class="col-12-auto">
         {{ form.csrf_token }}
         <div class="input-group mb-3">
           {{ form.link(placeholder='  Paste link here') }}
@@ -21,8 +21,18 @@ Automated Citation
             <input class="btn btn-secondary" type="submit" value="Cite Source" id="button-addon2"></input>
           </div>
         </div>
-      </form>
-    </div>
+        <div class="d-flex justify-content-center">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="format" id="0" value="mla">
+            <label class="form-check-label" for="0">MLA</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="format" id="1" value="cmos">
+            <label class="form-check-label" for="1">Chicago</label>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
   <br>
   <h4 class="text-center"><i>or</i></h4>

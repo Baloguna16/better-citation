@@ -4,6 +4,7 @@ from datetime import datetime, date
 import re
 
 import format.mla as mla
+import format.cmos as cmos
 
 #TODO: create a citation from manual inputs
 class ManualCitation:
@@ -88,4 +89,9 @@ def create_citation_manual(form, style="mla"):
         "location" : manual_citation.get_location(),
         "accessdate" : manual_citation.get_accessdate()
         }
-    return mla.mla_citation(citation_raw, htmlify=True)
+    if style == "mla":
+        return mla.mla_citation(citation_raw, htmlify=True)
+    elif style == "cmos":
+        return cmos.cmos_citation(citation_raw, htmlify=True)
+    else:
+        return None

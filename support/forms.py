@@ -8,12 +8,16 @@ from datetime import date
 
 class BasicForm(FlaskForm):
     link = StringField('Website Link')
-    # style = RadioField('Citation Style',
-    #     choices=[(0, 'MLA')], #, (1, 'Chicago')
-    #     validators=[InputRequired()], coerce=int)
     # source = SelectField('Type of source',
     #     choices=[(0, 'Journalism'), (1, 'Research'), (2, 'Other')],
     #     validators=[InputRequired()], coerce=int)
+
+class FormatForm(FlaskForm):
+    style = RadioField('Citation Style',
+        choices=[(0, 'MLA'), (1, 'Chicago')],
+        validators=[InputRequired()],
+        default='0',
+        coerce=int)
 
 class AdvancedForm(FlaskForm):
     # Author.
