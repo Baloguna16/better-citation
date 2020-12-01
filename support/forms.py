@@ -43,4 +43,4 @@ class ManualForm(FlaskForm):
     publisher = StringField("Name of Publisher")
     pubdate = DateField("Date Published (YYYY-MM-DD)", format='%Y-%m-%d', default=date.today())
     location = StringField("URL or Page Number")
-    accessdate = DateField("Date Published (YYYY-MM-DD)", format='%Y-%m-%d', default=date.today())
+    accessdate = DateField("Date Accessed (YYYY-MM-DD)", format='%Y-%m-%d', default=date.today())
