@@ -21,7 +21,7 @@ def get_authors_nyt(soup):
         if ' and ' in span_content and ', ' not in span_content:
             authors = span_content.split(' and ')
         else:
-            authors = [spans['content']]
+            authors = [span_content]
     else:
         authors = None
     return authors
