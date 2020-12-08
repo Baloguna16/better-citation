@@ -15,8 +15,11 @@ def get_authors_nyt(soup):
         authors = [span.string for span in spans]
     elif soup.find("meta", {"name": "byl"}):
         spans = soup.find("meta", {"name": "byl"})
-        if ' and ' in spans['content'] and ', ' not in spans['content']:
-            authors = spans['content'].split(' and ')
+        span_content = spans['content']
+        if "By " in spans['content']:
+            span_content = spans['content'].replace("By ", "")
+        if ' and ' in span_content and ', ' not in span_content:
+            authors = span_content.split(' and ')
         else:
             authors = [spans['content']]
     else:
