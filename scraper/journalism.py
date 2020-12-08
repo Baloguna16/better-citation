@@ -53,16 +53,22 @@ def get_publisher(soup):
     return container
 
 def get_pubdate(soup):
-    date_tag = soup.find("time")
-    if date_tag:
-        publication_date = date_tag["datetime"]
-        parts = publication_date.split('T')
-        try:
-            formatted_date = datetime.strptime(parts[0], "%Y-%m-%d")
-        except:
-            formatted_date = date.today()
+    if soup.find("meta", {'property': "og:updated_time"}):
+        date_tag = soup.find("meta", {'property': "og:updated_time"})
+        if 'T' in date_tag["content"]:
+            publication_date = date_tag["content"]
+            time_str = publication_date.split('T')[0]
+        else:
+            time_str = date_tag["content"]
+        formatted_date = datetime.strptime(time_str, "%Y-%m-%d")
     else:
-        formatted_date = date.today()
+        date_tag = soup.find("time")
+        if date_tag:
+            publication_date = date_tag["datetime"]
+            time_str = publication_date.split('T')[0]
+            formatted_date = datetime.strptime(time_str, "%Y-%m-%d")
+        else:
+            formatted_date = date.today()
     return formatted_date
 
 def get_location(link):
