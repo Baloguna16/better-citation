@@ -11,9 +11,15 @@ def get_authors(soup):
         author_tag = soup.find("meta", {"property": "author"})
         if not author_tag:
             return None
-    if " and " in author_tag['content']:
-        author_list = author_tag['content'].split(" and ")
-        authors = [author for author in author_list]
+    tag_content = author_tag['content']
+    if "By " in author_tag['content']:
+        tag_content = author_tag['content'].replace("By ", "")
+    if ' and ' in tag_content and ', ' not in tag_content:
+        authors = tag_content.split(' and ')
+    elif ' and ' in tag_content and ', ' in tag_content:
+        authors = re.split(", | and ", tag_content)
+    elif ' and ' not in tag_content and ', ' in tag_content:
+        authors = tag_content.split(', ')
     else:
         authors = [author_tag['content']]
     return authors
@@ -64,11 +70,11 @@ def get_pubdate(soup):
     else:
         date_tag = soup.find("time")
         if date_tag:
-            if date_tag["datetime"]:
+            try:
                 publication_date = date_tag["datetime"]
                 time_str = publication_date.split('T')[0]
                 formatted_date = datetime.strptime(time_str, "%Y-%m-%d")
-            else:
+            except:
                 formatted_date = date.today()
         else:
             formatted_date = date.today()

@@ -21,17 +21,14 @@ def get_authors_nyt(soup):
         if ' and ' in span_content and ', ' not in span_content:
             authors = span_content.split(' and ')
         elif ' and ' in span_content and ', ' in span_content:
-            authors_part1 = span_content.split(',')[:-1]
-            authors_part2 = span_content.split(' and ')[1]
-            authors = []
-            for author in authors_part1:
-                authors.append(author)
-            for author in authors_part2:
-                authors.append(author)
+            authors = re.split(", | and ", span_content)
+        elif ' and ' not in tag_content and ', ' in tag_content:
+            authors = span_content.split(', ')
         else:
             authors = [span_content]
     else:
         authors = None
+    print(authors)
     return authors
 
 def get_title_nyt(soup):
