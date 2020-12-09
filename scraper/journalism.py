@@ -64,9 +64,12 @@ def get_pubdate(soup):
     else:
         date_tag = soup.find("time")
         if date_tag:
-            publication_date = date_tag["datetime"]
-            time_str = publication_date.split('T')[0]
-            formatted_date = datetime.strptime(time_str, "%Y-%m-%d")
+            if date_tag["datetime"]:
+                publication_date = date_tag["datetime"]
+                time_str = publication_date.split('T')[0]
+                formatted_date = datetime.strptime(time_str, "%Y-%m-%d")
+            else:
+                formatted_date = date.today()
         else:
             formatted_date = date.today()
     return formatted_date
