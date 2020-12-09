@@ -20,6 +20,12 @@ def get_authors_nyt(soup):
             span_content = spans['content'].replace("By ", "")
         if ' and ' in span_content and ', ' not in span_content:
             authors = span_content.split(' and ')
+        elif ' and ' in span_content and ', ' in span_content:
+            authors_part1 = span_content.split(',')[:-1]
+            authors_part2 = span_content.split(' and ')[1]
+            authors = []
+            authors.append(authors_part1)
+            authors.append(authors_part2)
         else:
             authors = [span_content]
     else:
