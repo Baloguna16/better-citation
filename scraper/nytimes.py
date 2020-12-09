@@ -24,8 +24,10 @@ def get_authors_nyt(soup):
             authors_part1 = span_content.split(',')[:-1]
             authors_part2 = span_content.split(' and ')[1]
             authors = []
-            authors.append(authors_part1)
-            authors.append(authors_part2)
+            for author in authors_part1:
+                authors.append(author)
+            for author in authors_part2:
+                authors.append(author)
         else:
             authors = [span_content]
     else:
